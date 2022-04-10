@@ -1,6 +1,6 @@
 package ua.ithillel.tictactoe;
 
-public class WinChecker {
+public class WinChecker extends Checker {
     public final Coordinate[][] WIN_COMBINATION = {
             {new Coordinate(0, 0), new Coordinate(0, 1), new Coordinate(0, 2)},
             {new Coordinate(1, 0), new Coordinate(1, 1), new Coordinate(1, 2)},
@@ -10,8 +10,15 @@ public class WinChecker {
             {new Coordinate(0, 2), new Coordinate(1, 2), new Coordinate(2, 2)},
             {new Coordinate(0, 0), new Coordinate(1, 1), new Coordinate(2, 2)},
             {new Coordinate(2, 0), new Coordinate(1, 1), new Coordinate(0, 2)}};
+    private char symbol;
 
-    public boolean isWinner(Field field, char symbol) {
+    public WinChecker(Field field, char symbol) {
+        super(field);
+        this.symbol = symbol;
+    }
+
+    @Override
+    public boolean check() {
         char[][] data = field.getData();
 
         for (int i = 0; i < WIN_COMBINATION.length; i++) {

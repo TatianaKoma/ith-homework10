@@ -1,7 +1,18 @@
 package ua.ithillel.tictactoe;
 
-public class DrawChecker {
-    public boolean isAnyEmptyCell(Field field) {
+public class DrawChecker extends Checker {
+    public DrawChecker(Field field) {
+        super(field);
+    }
+
+    @Override
+    public boolean check() {
+        boolean isWinX =new WinChecker(field,'X').check();
+        boolean isWinO =new WinChecker(field,'O').check();
+        return !isWinX && !isWinO && !isAnyEmptyCell();
+    }
+
+    private boolean isAnyEmptyCell() {
         char[][] data = field.getData();
         int count = 0;
         for (int i = 0; i < data.length; i++) {
@@ -12,11 +23,5 @@ public class DrawChecker {
             }
         }
         return count > 0;
-    }
-
-    public boolean isDraw(Field field) {
-        boolean isWinX = new WinChecker().isWinner(field, 'X');
-        boolean isWinO = new WinChecker().isWinner(field, 'O');
-        return !isWinX && !isWinO && !isAnyEmptyCell(field);
     }
 }
