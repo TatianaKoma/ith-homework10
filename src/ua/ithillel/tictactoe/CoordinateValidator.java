@@ -19,5 +19,4 @@ public class CoordinateValidator {
     public boolean notValid(Coordinate coordinate) {
         return !valid(coordinate);
     }
-
 }
